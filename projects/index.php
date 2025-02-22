@@ -1,0 +1,815 @@
+<?php
+$mhost = 'localhost';//	Хост mysql
+$muser = 'u0980170_default';//	Пользователь mysql
+$mpass = '31_0lp7W';//	Пароль mysql
+$mbase = 'u0980170_default';//	База mysql
+$mysql=new mysqli($mhost,$muser,$mpass,$mbase);
+$charset='utf8';
+$mysql->set_charset($charset); if($mysql->connect_errno) exit('
+<h1 align="center">Не удалось подключиться к БД</h1>
+<br />Причина: '.$mysql->connect_error); $res=$mysql->query("SELECT * FROM
+forest WHERE g='{$_GET['house']}'"); $c=1; $dom=$res->fetch_array(); ?>
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!--  Title -->
+    <title>
+      Коттеджный поселок Forestkzn - земельные участки в Пестречинском районе
+    </title>
+
+    <!-- Font Google -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat:100,300,400,500,600,700,900"
+      rel="stylesheet"
+    />
+    <link
+      rel="shortcut icon"
+      href="assets/img/favicon.ico"
+      type="image/x-icon"
+    />
+    <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon" />
+
+    <!-- custom styles (optional) -->
+    <link href="./style.css" rel="stylesheet" />
+
+    <link href="./projectscss.css" rel="stylesheet" />
+    <link href="../responsive1.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="../swiper-style.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
+
+    <!-- Yandex.Metrika counter -->
+    
+    <link href="/photoviewer.min.css" rel="stylesheet">
+
+<!-- Core JS file -->
+
+  </head>
+
+  <body data-dsn-grid-mousemove="true">
+    <div class="wrapper" id="wrapper">
+      <div class="menu_btn">
+        <span>МЕНЮ</span>
+        <div class="burger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+      <div class="menu_wrapper">
+        <div class="menu_container">
+          <div class="menu-back">МЕНЮ</div>
+          <div class="menu_list">
+            <div class="menu_item">
+              <a href="../index.php">Главная</a>
+              <span>00</span>
+            </div>
+            <div class="menu_item">
+              <a href="../map.php">Генеральный план</a>
+              <span>01</span>
+            </div>
+            <div class="menu_item">
+              <a href="../projects.html">Проекты домов</a>
+              <span>02</span>
+            </div>
+            <div class="menu_item">
+              <a href="../?houses">Готовые дома</a>
+              <span>03</span>
+            </div>
+            <div class="menu_item">
+              <a href="../timeline.html">Ход строительства</a>
+              <span>04</span>
+            </div>
+           
+            <div class="mobile_soc">
+           
+              <a
+                target="_blank"
+                class="social2"
+                href="https://youtube.com/@vmstroy?si=bX0a1x6jS0RiWEW9"
+                >YOUTUBE</a
+              >&nbsp;&nbsp;&nbsp;&nbsp;
+              <a target="_blank" class="social2" href="https://t.me/vmstroyrf"
+                >ТЕLEGRAM</a
+              >
+            </div>
+          </div>
+          <div class="menu_contacts">
+            <div class="str">СТРОИТЕЛЬНАЯ КОМПАНИЯ ВМ СТРОЙ</div>
+            <p class="srr" style="margin-bottom: 25px">
+              Казань Шаляпина 32 <br />1 этаж
+            </p>
+            <div class="str">КОНТАКТНАЯ ИНФОРМАЦИЯ</div>
+            <div class="srr">
+              <a
+                style="color: inherit; margin-bottom: 25px"
+                href="tel:+79274944558"
+                >+7 927 494-45-58</a
+              >
+            </div>
+
+            <div class="str">ПОДПИСАТЬСЯ</div>
+            <div class="">
+              <a
+                target="_blank"
+                class="social2"
+                href="https://www.instagram.com/forest_kazan_rt?igsh=Nm1sZ3QxeGJmNjlk"
+                >INSTAGRAM</a
+              >&nbsp;&nbsp;&nbsp;&nbsp;
+              <a
+                target="_blank"
+                class="social2"
+                href="https://youtube.com/@vmstroy?si=bX0a1x6jS0RiWEW9"
+                >YOUTUBE</a
+              >&nbsp;&nbsp;&nbsp;&nbsp;
+              <a target="_blank" class="social2" href="https://t.me/vmstroyrf"
+                >ТЕLEGRAM</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="" class="wrapper_title">
+        <div class="wrapper_text">
+          <div><span style="color: #ffffff" class="project">Проект:</span></div>
+          <div>
+            <span style="color: #ffffff; font-weight: 900" class="burn"
+              ><?=ruProject($dom['project'])?></span
+            >
+          </div> 
+        </div>
+        <div class="wrapper_icons">
+          <img
+            style="filter: drop-shadow(0px 0px 0px #666)"
+            class="wrapper_icon"
+            src="/projectsImages/<?=$dom['project']?>-icon.png"
+          />
+        </div>
+      </div>
+
+      <div class="wrapper_info">
+        
+      </div>
+     <div class="wrapper_price">
+          <img class="ruble_svg" src="../projectsImages/ruble_img.png" />
+
+          <div style="display: none" id="price1Alt" class="head_price"></div>
+
+          <div id="price1" class="head_price"><?=number_format(str_replace(" ","",$dom['price']), 0, '.', ' ')?></div>
+        </div>
+    </div>
+    <div class="slider_wrapper">
+      <div class="slider_info">
+        <div class="slider_text">
+          <div class="text_head">эко-стиль</div>
+          <div class="text_bottom">
+            Натуральными материалами, гармонично вписывающимися в природу
+          </div>
+        </div>
+        <div class="slider_button">
+          <button class="slider_btn clbck" clbck="footer" type="button">
+            записаться<br />
+            на экскурсию
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="video_container">
+      <div class="video">
+        <img src="../projectsImages/video.png" />
+        <a
+          href="https://youtu.be/2R_M6EMt93M?feature=shared"
+          data-fancybox
+          data-caption="Первый отчет"
+          class="video_button"
+        >
+          <img src="../projectsImages/play.png" />
+        </a>
+      </div>
+      <div class="plan">
+        <?
+        require_once("../Mobile_Detect.php");
+$mbdt= new Mobile_Detect;
+    if ($mbdt->isMobile()) 
+    require ("mini-mapm.php");
+    else   require ("mini-map.php");
+        ?>
+      </div>
+    </div>
+
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+         <a data-gallery="manual" href="../projectsImages/<?=$dom['project']?>1.webp"> <img src="../projectsImages/<?=$dom['project']?>1.webp" /> </a>
+        </div>
+        <div class="swiper-slide">
+          <a data-gallery="manual" href="../projectsImages/<?=$dom['project']?>2.webp">  <img src="../projectsImages/<?=$dom['project']?>2.webp" /></a>
+        </div>
+        <div class="swiper-slide">
+          <a data-gallery="manual" href="../projectsImages/<?=$dom['project']?>1.webp">  <img src="../projectsImages/<?=$dom['project']?>1.webp" /></a>
+        </div>
+        <div class="swiper-slide">
+          <a data-gallery="manual" href="../projectsImages/<?=$dom['project']?>2.webp">  <img src="../projectsImages/<?=$dom['project']?>2.webp" /></a>
+        </div>
+      </div>
+
+      <div class="swiper-button-prev" id="swiper_one"></div>
+      <div class="swiper-button-next" id="swiper_two"></div>
+    </div>
+
+    <main class="main" style="">
+      <div class="stages has-popup over-hidden">
+        <div class="stages_head">
+          <div class="stage_head">
+            <div class="stage">план дома</div>
+            <div class="stage_area">123m<span class="kvadr">2</span></div>
+          </div>
+          <div class="stage_image">
+            <a
+              href="../projectsImages/<?=$dom['project']?>_plan.webp"
+              class="p-relative over-hidden d-flex"
+            >
+              <img
+                class="stage_img contain-bg-img"
+                src="../projectsImages/<?=$dom['project']?>_plan.webp"
+              />
+              <div class="plus"></div>
+            </a>
+          </div>
+        </div>
+        
+        <?
+        $text = file_get_contents($dom['project'].'.html', true);
+        if(preg_match_all('|<!-- Start -->(.*)<!-- End -->|Uis', $text, $result))
+{
+    foreach($result[1] as $span_text)
+        echo $span_text . '<br>';
+}
+        ?>
+        
+        <div class="stage_button">
+          <button class="stage_btn clbck" clbck="footer"  type="button">
+            изменить планировку
+          </button>
+        </div>
+      </div>
+
+      <div class="thankyou_modal">
+        <div class="error_container1">
+          <div class="thankyou_text thankyou_text1">Спасибо за заявку!</div>
+          <div class="thankyou_text">
+            В ближайшее время с Вами свяжется наш менеджер.
+          </div>
+
+          <div class="btn-close-catalog-modal">
+            <svg
+              width="36"
+              height="36"
+              viewBox="0 0 36 36"
+              fill="white"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M15.8787 18.0001L0.939331 3.06077L3.06065 0.939453L18 15.8788L32.9393 0.939453L35.0607 3.06077L20.1213 18.0001L35.0607 32.9395L32.9393 35.0608L18 20.1214L3.06065 35.0608L0.939331 32.9395L15.8787 18.0001Z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div class="modal-catalog-background"></div>
+      </div>
+
+      <div class="border"></div>
+      <footer id="footer">
+        <div class="element">
+          <div class="overlap-16">
+            <div class="view-9">
+              <form method="post" action="leed.php" class="overlap-17 form">
+                <button class="overlap-group-3" type="submit" disabled>
+                  <div class="text-wrapper-27">ОТПРАВИТЬ</div>
+                  <img class="mask-group-2" src="../1/img/mask-group-2.png" />
+                </button>
+                <div class="text-wrapper-28">ЗАПИСАТЬСЯ НА ЭКСКУРСИЮ</div>
+                <div class="text-wrapper-29 form-field">
+                  <input
+                    name="name"
+                    placeholder="Ваше имя"
+                    type="text"
+                    required
+                  />
+                  <small></small>
+                </div>
+                <div class="text-wrapper-30 form-field">
+                  <input
+                    name="phone"
+                    placeholder="Номер телефона"
+                    type="text"
+                    required
+                  />
+                  <small></small>
+                </div>
+
+                <div class="div-2 radio-label">
+                  <input
+                    class="radio"
+                    type="radio"
+                    name="pers"
+                    id="pers"
+                    checked
+                  />
+                  <label for="pers" class="radio-title"
+                    >Нажимая кнопку «Отправить» я соглашаюсь с
+                    <a href="/privacy-policy.pdf" target="_blank"
+                      >Пользовательским соглашением</a
+                    ></label
+                  >
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="text-wrapper-33">
+            Хотите посмотреть <br />своими глазами?
+          </div>
+          <a class="text-wrapper-34" href="/privacy-policy.pdf" target="_blank"
+            >Политика конфиденциальности</a
+          >
+          <p class="text-wrapper-35">
+            Предложение не является публичной офертой
+          </p>
+          <div class="text-wrapper-36">КП FOREST VILLAGE, 2025</div>
+          <div class="text-wrapper-37">СТРОИТЕЛЬНАЯ КОМПАНИЯ ВМ СТРОЙ</div>
+          <div class="text-wrapper-38">КОНТАКТНАЯ ИНФОРМАЦИЯ</div>
+          <div class="text-wrapper-39">ПОДПИСАТЬСЯ</div>
+          <div class="social">
+      
+            <a
+              class="instagram-YOUTUBE"
+              href="https://youtube.com/@vmstroy?si=bX0a1x6jS0RiWEW9"
+              target="_blank"
+              >YOUTUBE</a
+            >
+            <a
+              class="instagram-YOUTUBE"
+              href="https://t.me/vmstroyrf"
+              target="_blank"
+              >ТЕLEGRAM</a
+            >
+          </div>
+
+          <p class="text-wrapper-40">Казань Шаляпина 32 <br />1 этаж</p>
+          <div class="text-wrapper-41">
+            <a href="tel:+7 927 494-45-58" style="color: aliceblue"
+              >+7 927 494-45-58</a
+            >
+          </div>
+          <p class="text-wrapper-42">
+            Оставьте контакты и мы пригласим <br />Вас на экскурсию — покажем
+            ход строительства и ответим на все вопросы.
+          </p>
+          <img id="contact" class="line-5" src="../1/img/line-11.svg" />
+        </div>
+        <div class="mobile_footer">
+          <div id="footerForm" class="text-wrapper-22">
+            Хотите посмотреть <br />своими глазами?
+          </div>
+          <div class="overlap-12">
+            <p class="text-wrapper-2345">
+              Оставьте контакты и мы пригласим <br />Вас на экскурсию — покажем
+              ход строительства и ответим на все вопросы.
+            </p>
+            <div class="view-2">
+              <div class="overlap-13">
+                <div class="rectangle-6"></div>
+                <div class="rectangle-7"></div>
+                <div class="text-wrapper-24">ЗАПИСАТЬСЯ НА <br />ЭКСКУРСИЮ</div>
+                <form method="post" action="leed.php">
+                  <button
+                    style="
+                      width: 100%;
+                      height: 100%;
+                      border: none;
+                      background: transparent;
+                      cursor: pointer;
+                    "
+                    type="submit"
+                    disabled
+                  >
+                    <div class="text-wrapper-25">ОТПРАВИТЬ</div>
+                  </button>
+                  <div class="text-wrapper-26 form-field">
+                    <input
+                      name="name"
+                      placeholder="Ваше имя"
+                      type="text"
+                      required
+                    />
+                    <small></small>
+                  </div>
+                  <div class="text-wrapper-27 form-field">
+                    <input
+                      name="phone"
+                      placeholder="Номер телефона"
+                      type="tel"
+                      required
+                    />
+                    <small></small>
+                  </div>
+
+                  <div class="div-2 radio-label">
+                    <input
+                      class="radio"
+                      type="radio"
+                      name="pers"
+                      id="pers"
+                      checked
+                    />
+                    <label for="pers" class="radio-title"
+                      >Нажимая кнопку «Отправить» я соглашаюсь с
+                      <a href="/privacy-policy.pdf" target="_blank"
+                        >Пользовательским соглашением</a
+                      ></label
+                    >
+                  </div>
+                </form>
+
+                <img class="mask-group" src="../2/arr.png" />
+              </div>
+            </div>
+          </div>
+          <div class="footer_info">
+            <div class="text-wrapper-30">СТРОИТЕЛЬНАЯ КОМПАНИЯ ВМ СТРОЙ</div>
+            <p class="element-5">Казань Шаляпина 32 <br />1 этаж</p>
+            <div class="text-wrapper-31">КОНТАКТНАЯ ИНФОРМАЦИЯ</div>
+            <div class="text-wrapper-33">
+              <a style="color: inherit" href="tel:+79274944558"
+                >+7 927 494-45-58</a
+              >
+            </div>
+
+            <div class="text-wrapper-32">ПОДПИСАТЬСЯ</div>
+            <div class="instagram-YOUTUBE">
+       
+              <a
+                target="_blank"
+                class="social1"
+                href="https://youtube.com/@vmstroy?si=bX0a1x6jS0RiWEW9"
+                >YOUTUBE</a
+              >&nbsp;&nbsp;&nbsp;&nbsp;
+              <a target="_blank" class="social1" href="https://t.me/vmstroyrf"
+                >ТЕLEGRAM</a
+              >
+            </div>
+
+            <a
+              class="text-wrapper-34"
+              href="/privacy-policy.pdf"
+              target="_blank"
+              >Политика конфиденциальности</a
+            >
+            <div class="text-wrapper-344">
+              Предложение не является публичной офертой
+            </div>
+            <div class="text-wrapper-355">КП FOREST VILLAGE, 2025</div>
+          </div>
+        </div>
+      </footer>
+    </main>
+    <script src="../js/jquery-3.1.1.min.js"></script>
+    <script src="/js/photoviewer.min.js"></script>
+    <script>
+            $("#<?=$_GET['house'] ?>").children().map(function() {
+                if ($(this).attr('fill') != "#141414" && $(this).attr('fill') != "white" && $(this).attr('fill') != "#2C2C2C") {
+                    $(this).attr("fill", "#DC0F0F");
+         }
+            });
+            
+            
+      let zoom = jQuery(window).width() / 1728;
+      let wrapper = document.getElementById("wrapper");
+      Fancybox.bind("[data-fancybox]", {
+        // Your custom options
+      });
+
+      if (
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent
+        )
+      ) {
+        wrapper.style.backgroundImage =
+          "url(../projectsImages/<?=$dom['project']?>_mobile.webp)";
+      } else {
+        wrapper.style.backgroundImage =
+          "url(../projectsImages/<?=$dom['project']?>.webp)";
+
+        $("footer").css("zoom", zoom);
+      }
+
+      $(document).ready(function () {
+        $(".clbck").click(function () {
+          let clbck = $(this).attr("clbck");
+          $("html, body").animate(
+            {
+              scrollTop: $("#" + clbck).offset().top,
+            },
+            1000
+          );
+        });
+      });
+    </script>
+    <script>
+      const swiper = new Swiper(".swiper", {
+        direction: "horizontal",
+        loop: true,
+        effect: "coverflow",
+        coverflowEffect: {
+          rotate: 30,
+          slideShadows: false,
+        },
+
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+    </script>
+
+    <script>
+      const usernameEl = document.querySelectorAll("input[name=name]");
+      const phoneEl = document.querySelectorAll("input[name=phone]");
+      const form = document.querySelectorAll("form");
+      const thankYouModal = document.querySelector(".thankyou_modal");
+      const backgroundModal = document.querySelector(
+        ".modal-catalog-background"
+      );
+      const btnCloseCatalog = document.querySelector(
+        ".btn-close-catalog-modal"
+      );
+      phoneEl.forEach((el) => {
+        el.addEventListener("click", (e) => {
+          el.value = "+7";
+        });
+      });
+
+      const checkUsername = (element) => {
+        if (element) {
+          let valid = false;
+          const min = 2,
+            max = 25;
+          const username = element.value.trim();
+
+          if (!isRequired(username)) {
+            showError(element, "Представьтесь, пожалуйста!");
+          } else if (!isBetween(username.length, min, max)) {
+            showError(
+              element,
+              `Имя должно быть не короче ${min} и не длиннее ${max} символов.`
+            );
+          } else {
+            showSuccess(element);
+            valid = true;
+          }
+          return valid;
+        }
+        return true;
+      };
+
+      const checkPhone = (element) => {
+        if (element) {
+          let valid = false;
+          const phoneNum = element.value.trim();
+
+          if (!isRequired(phoneNum)) {
+            showError(element, "Введите ваш телефон!");
+          } else if (!isPhoneCorrect(phoneNum)) {
+            showError(element, "Неверно введен номер телефона");
+          } else {
+            showSuccess(element);
+            valid = true;
+          }
+          return valid;
+        }
+        return true;
+      };
+
+      const isPhoneCorrect = (phoneNum) => {
+        const re = /^\+?[78][-\(]?\d{3}\)?-?\d{3}-?\d{2}-?\d{2}$/;
+        return re.test(phoneNum);
+      };
+
+      const isRequired = (value) => (value === "" ? false : true);
+      const isBetween = (length, min, max) =>
+        length < min || length > max ? false : true;
+
+      const showError = (input, message) => {
+        // get the form-field element
+        const formField = input.parentElement;
+        // add the error class
+        formField.classList.remove("success");
+        formField.classList.add("error");
+
+        // show the error message
+        const error = formField.querySelector("small");
+        error.textContent = message;
+      };
+
+      const showSuccess = (input) => {
+        // get the form-field element
+        const formField = input.parentElement;
+
+        // remove the error class
+        formField.classList.remove("error");
+        formField.classList.add("success");
+
+        // hide the error message
+        const error = formField.querySelector("small");
+        error.textContent = "";
+      };
+
+      const debounce = (fn, delay = 500) => {
+        let timeoutId;
+        return (...args) => {
+          // cancel the previous timer
+          if (timeoutId) {
+            clearTimeout(timeoutId);
+          }
+          // setup a new timer
+          timeoutId = setTimeout(() => {
+            fn.apply(null, args);
+          }, delay);
+        };
+      };
+
+      form.forEach((el) => {
+        el.addEventListener(
+          "input",
+          debounce(function (e) {
+            switch (e.target.name) {
+              case "name":
+                checkUsername(e.target);
+                break;
+              case "phone":
+                checkPhone(e.target);
+                break;
+            }
+            const submit = el.querySelector("button[type=submit]");
+            let allValid = false;
+            let radio = el.querySelector("input[type=radio]");
+            if (
+              checkUsername(el.querySelector("input[name=name]")) &&
+              checkPhone(el.querySelector("input[name=phone]")) &&
+              radio.checked
+            ) {
+              allValid = true;
+            }
+
+            if (allValid) {
+              submit.removeAttribute("disabled");
+            } else {
+              submit.setAttribute("disabled", "");
+            }
+          })
+        );
+      });
+      form.forEach((el) => {
+        el.addEventListener("submit", (e) => {
+          e.preventDefault();
+          document.querySelector("body").style["overflow"] = "hidden";
+          thankYouModal.style["display"] = "flex";
+        });
+      });
+      btnCloseCatalog.addEventListener("click", () => {
+        document.querySelector("body").style["overflow"] = "auto";
+        thankYouModal.style["display"] = "none";
+      });
+
+      backgroundModal.addEventListener("click", () => {
+        document.querySelector("body").style["overflow"] = "auto";
+        thankYouModal.style["display"] = "none";
+      });
+    </script>
+    <script>
+      let menuBtn = document.querySelector(".menu_btn");
+      let menu = document.querySelector(".menu_wrapper");
+      let burger = document.querySelector(".burger");
+
+      menuBtn.addEventListener("click", () => {
+        if (menuBtn.classList.contains("active")) {
+          document.querySelector("body").style["overflow"] = "auto";
+          menuBtn.classList.remove("active");
+          burger.classList.remove("active");
+          menu.classList.remove("activeMenu");
+        } else {
+          document.querySelector("body").style["overflow"] = "hidden";
+          menuBtn.classList.add("active");
+          burger.classList.add("active");
+          menu.classList.add("activeMenu");
+        }
+      });
+      $('[data-gallery=manual]').click(function (e) {
+
+  e.preventDefault();
+
+  var items = [],
+    // get index of element clicked
+    options = {
+      index: $(this).index(),
+      draggable : false
+    };
+
+  // looping to create images array
+  $('[data-gallery=manual]').each(function () {
+    let src = $(this).attr('href');
+    items.push({
+      src: src
+    });
+  });
+
+  new PhotoViewer(items, options);
+
+});
+
+    </script>
+  </body>
+</html>
+<?
+function ruProject($pj){
+    switch ($pj) {
+        
+        case 'almagach':
+        return 'Алмагач';
+        break;
+        
+             case 'almagachblack':
+        return 'Алмагач Black';
+        break;
+        
+        
+             case 'kaen':
+        return 'Каен';
+        break;
+        
+        
+             case 'kaenblack':
+        return 'Каен Black';
+        break;
+        
+             case 'karagach':
+        return 'Карагач';
+        break;
+        
+             case 'karagachblack':
+        return 'Карагач Black';
+        break;
+        
+            case 'kashtan':
+        return 'Каштан';
+        break;
+                  case 'kashtanblack':
+        return 'Каштан Black';
+        break;
+                  case 'kedr':
+        return 'Кедр';
+        break;
+        
+        
+        
+                     case 'kedrblack':
+        return 'Кедр Black';
+        break;
+        
+        
+             case 'kiparis':
+        return 'Кипарис';
+        break;
+        
+        
+             case 'kiparisblack':
+        return 'Кипарис Black';
+        break;
+        
+             case 'narat':
+        return 'Нарат';
+        break;
+        
+             case 'naratblack':
+        return 'Нарат Black';
+        break;
+
+        
+    }
+}
+?>
