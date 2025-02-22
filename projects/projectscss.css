@@ -465,7 +465,6 @@
 
 .stages_info {
   width: 45%;
-  margin-bottom: 30px;
 }
 
 .stage_image {
@@ -2931,7 +2930,6 @@ input[name="phone"].invalid::placeholder {
 
   .stages_info {
     width: 100%;
-    margin-bottom: 10px;
   }
 
   .plus {
@@ -2949,7 +2947,6 @@ input[name="phone"].invalid::placeholder {
   .stage_button {
     display: flex;
     justify-content: flex-end;
-    padding-bottom: 20px;
     width: 100%;
   }
 
