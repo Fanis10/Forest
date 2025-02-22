@@ -536,6 +536,9 @@
 
 .stage_btn {
   height: 74px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: #fff;
   border: none;
   border-radius: 50px;
@@ -2906,18 +2909,7 @@ input[name="phone"].invalid::placeholder {
   }
 
   .stages {
-    padding-top: 0;
-    margin-bottom: 0;
-    flex-wrap: wrap;
-  }
-
-  .stages_head {
-    width: 100%;
-    margin-bottom: 30px;
-  }
-
-  .stage_head {
-    margin-bottom: 10px;
+    margin: 30px 0;
   }
 
   .stage_rooms {
@@ -2950,17 +2942,6 @@ input[name="phone"].invalid::placeholder {
     bottom: 0px;
   }
 
-  .stage_list {
-    display: flex;
-    font-family: "Montserrat";
-    color: #f2f2f1;
-    font-size: 22px;
-    font-weight: 300;
-    justify-content: space-between;
-    width: 100%;
-    padding-left: 0;
-  }
-
   .stage_list_nondec {
     font-weight: 500;
   }
@@ -2973,7 +2954,6 @@ input[name="phone"].invalid::placeholder {
   }
 
   .stage_btn {
-    max-width: 450px;
     height: 50px;
     font-size: 20px;
   }
@@ -3459,14 +3439,54 @@ input[name="phone"].invalid::placeholder {
 }
 
 @media screen and (max-width: 1280px) {
+  .stages {
+    gap: 40px;
+    margin: 50px 0;
+  }
+
+  .stage_list {
+    font-size: 22px;
+  }
+
+  .stage_btn {
+    height: 50px;
+    font-size: 20px;
+  }
+
+  .stage_btn2 {
+    margin-top: 35px;
+    margin-right: 35px;
+  }
+
   .home-info {
     padding: 50px 0;
   }
+
   .home-info__title {
     font-size: 39px;
   }
+
   .home-info__list li {
     font-size: 29px;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .stages {
+    flex-direction: column;
+    gap: 35px;
+  }
+
+  .stages_head {
+    width: 100%;
+  }
+
+  .stages_info {
+    width: 100%;
+  }
+
+  .stage_btn2 {
+    margin-right: 0;
   }
 }
 
@@ -3479,6 +3499,12 @@ input[name="phone"].invalid::placeholder {
   }
   .home-info__list li {
     font-size: 19px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .stage_btn {
+    width: 100%;
   }
 }
 
